@@ -18,4 +18,315 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-function URI(a){a=a||"";var b=0,c=a.indexOf("://");if(-1!=c){this.scheme=a.slice(0,c),b=c+3;var d=a.indexOf("/",b);-1==d&&(d=a.length,a+="/");var e=a.slice(b,d);this.authority=e,b=d,this.host=e;var f=e.indexOf(":");if(-1!=f&&(this.host=e.slice(0,f),this.port=parseInt(e.slice(f+1),10),isNaN(this.port)))throw new Error("Invalid URI syntax")}var g=a.indexOf("?",b);-1!=g&&(this.path=a.slice(b,g),b=g+1);var h=a.indexOf("#",b);-1!=h?(-1!=g?this.query=a.slice(b,h):this.path=a.slice(b,h),b=h+1,this.fragment=a.slice(b)):-1!=g?this.query=a.slice(b):this.path=a.slice(b)}var browser=null;if("undefined"!=typeof ActiveXObject)browser=-1!=navigator.userAgent.indexOf("MSIE 10")?"chrome":"ie";else if(-1!=navigator.userAgent.indexOf("Trident/7")&&-1!=navigator.userAgent.indexOf("rv:11"))browser="chrome";else if("[object Opera]"==Object.prototype.toString.call(window.opera))browser="opera";else if(-1!=navigator.vendor.indexOf("Apple"))browser="safari",(-1!=navigator.userAgent.indexOf("iPad")||-1!=navigator.userAgent.indexOf("iPhone"))&&(browser.ios=!0);else if(-1!=navigator.vendor.indexOf("Google"))browser=-1!=navigator.userAgent.indexOf("Android")&&-1==navigator.userAgent.indexOf("Chrome")?"android":"chrome";else{if("Gecko"!=navigator.product||!window.find||navigator.savePreferences)throw new Error("couldn't detect browser");browser="firefox"}!function(){var a=URI.prototype;a.toString=function(){var a=[],b=this.scheme;if(void 0!==b){a.push(b),a.push("://"),a.push(this.host);var c=this.port;void 0!==c&&(a.push(":"),a.push(c.toString()))}return void 0!==this.path&&a.push(this.path),void 0!==this.query&&(a.push("?"),a.push(this.query)),void 0!==this.fragment&&(a.push("#"),a.push(this.fragment)),a.join("")};var b={http:80,ws:80,https:443,wss:443};URI.replaceProtocol=function(a,b){var c=a.indexOf("://");return c>0?b+a.substr(c):""}}(),function(){function a(){var b=new URI("ie"==browser?document.URL:location.href),c={http:80,https:443};if(null==b.port&&(b.port=c[b.scheme],b.authority=b.host+":"+b.port),0==(b.fragment||"").length)return void setTimeout(a,20);var d=unescape(b.fragment),e=d.split(","),f=e.shift(),g=e.shift(),h=unescape(e.shift()),i=b.scheme+"://"+b.authority;sourceBridge=parent,"undefined"!=typeof ActiveXObject&&(sourceBridge=sourceBridge.opener);var j=sourceBridge.parent;try{j.location.hash}catch(k){document.domain=document.domain;try{j.location.hash}catch(l){return void location.reload()}}var m=j.postMessage0;"undefined"!=typeof m&&setTimeout(function(){m.attach(j.parent,f,g,window,parent,h)},0)}var b;window.onload=a,window.onunload=function(){if(void 0!=sourceBridge){var a=sourceBridge.parent;try{var b=a.postMessage0;"undefined"!=typeof b&&b.detach(a.parent)}catch(c){}}}}();
+
+
+/**
+ * @ignore
+ */
+var browser = null;
+if (typeof(ActiveXObject) != "undefined") {
+    //KG-5860: treat IE 10 same as Chrome
+    if(navigator.userAgent.indexOf("MSIE 10")!=-1){
+        browser="chrome";
+    }else{
+        browser="ie";
+    }
+}
+else if (navigator.userAgent.indexOf("Trident/7") != -1 && navigator.userAgent.indexOf("rv:11") != -1) {
+    // treat IE 11 same as chrome
+    // IE 11 UA string - http://blogs.msdn.com/b/ieinternals/archive/2013/09/21/internet-explorer-11-user-agent-string-ua-string-sniffing-compatibility-with-gecko-webkit.aspx
+    // window.ActiveXObject property is hidden from the DOM
+    browser = "chrome";
+}
+else if(Object.prototype.toString.call(window.opera) == "[object Opera]") {
+    browser = 'opera';
+}
+else if (navigator.vendor.indexOf('Apple') != -1) {
+    // This has to happen before the Gecko check, as that expression also
+    // evaluates to true.
+    browser = 'safari';
+    // add ios attribute for known iOS substrings
+    if (navigator.userAgent.indexOf("iPad")!=-1 || navigator.userAgent.indexOf("iPhone")!=-1) {
+    	browser.ios = true;
+    }
+}
+else if (navigator.vendor.indexOf('Google') != -1) {
+    if ((navigator.userAgent.indexOf("Android") != -1) &&
+        (navigator.userAgent.indexOf("Chrome") == -1)) {
+        browser = "android";
+    }
+    else {
+        browser="chrome";
+    }
+}
+else if (navigator.product == 'Gecko' && window.find && !navigator.savePreferences) {
+    browser = 'firefox'; // safari as well
+}
+else {
+    throw new Error("couldn't detect browser");
+}
+
+
+
+/**
+ * Creates a new URI instance with the specified location.
+ *
+ * @param {String} str  the location string
+ * 
+ * @private
+ * @class  Represents a Uniform Resource Identifier (URI) reference. 
+ */
+function URI(str) {
+	// TODO: use regular expression instead of manual string parsing
+    str = str || "";
+    var position = 0;
+    
+    var schemeEndAt = str.indexOf("://");
+    if (schemeEndAt != -1) {
+	    /**
+	     * The scheme property indicates the URI scheme.
+	     *
+	     * @public
+	     * @field
+	     * @name scheme
+	     * @type String
+	     * @memberOf URI
+	     */
+        this.scheme = str.slice(0, schemeEndAt);
+        position = schemeEndAt + 3;
+
+        var pathAt = str.indexOf('/', position);
+        if (pathAt == -1) {
+           pathAt = str.length;
+           // Add trailing slash to root URI if it is missing
+           str += "/";
+        }
+
+        var authority = str.slice(position, pathAt);
+        /**
+         * The authority property indiciates the URI authority.
+         *
+         * @public
+         * @field
+         * @name authority
+         * @type String
+         * @memberOf URI
+         */
+        this.authority = authority;
+        position = pathAt;
+        
+        /**
+         * The host property indiciates the URI host.
+         *
+         * @public
+         * @field
+         * @name host
+         * @type String
+         * @memberOf URI
+         */
+        this.host = authority;
+        var colonAt = authority.indexOf(":");
+        if (colonAt != -1) {
+            this.host = authority.slice(0, colonAt);
+
+	        /**
+	         * The port property indiciates the URI port.
+	         *
+	         * @public
+	         * @field
+	         * @name port
+	         * @type Number
+	         * @memberOf URI
+	         */
+            this.port = parseInt(authority.slice(colonAt + 1), 10);
+            if (isNaN(this.port)) {
+                throw new Error("Invalid URI syntax");
+            }
+        } 
+    }
+
+    var queryAt = str.indexOf("?", position);
+    if (queryAt != -1) {
+        /**
+         * The path property indiciates the URI path.
+         *
+         * @public
+         * @field
+         * @name path
+         * @type String
+         * @memberOf URI
+         */
+        this.path = str.slice(position, queryAt);
+        position = queryAt + 1;
+    }
+
+    var fragmentAt = str.indexOf("#", position);
+    if (fragmentAt != -1) {
+        if (queryAt != -1) {
+            this.query = str.slice(position, fragmentAt);
+        }
+        else {
+            this.path = str.slice(position, fragmentAt);
+        }
+        position = fragmentAt + 1;
+        /**
+         * The fragment property indiciates the URI fragment.
+         *
+         * @public
+         * @field
+         * @name fragment
+         * @type String
+         * @memberOf URI
+         */
+        this.fragment = str.slice(position);
+    }
+    else {
+        if (queryAt != -1) {
+            this.query = str.slice(position);
+        }
+        else {
+            this.path = str.slice(position);
+        }
+    }
+}
+
+(function() {
+    var $prototype = URI.prototype;
+    
+    /**
+     * Returns a String representation of this URI.
+     *
+     * @return {String}  a String representation
+     *
+     * @public
+     * @function
+     * @name toString
+     * @memberOf URI
+     */
+    $prototype.toString = function() {
+        var sb = [];
+        
+        var scheme = this.scheme;
+        if (scheme !== undefined) {
+            sb.push(scheme);
+            sb.push("://");
+            sb.push(this.host);
+            
+            var port = this.port;
+            if (port !== undefined) {
+                sb.push(":");
+                sb.push(port.toString());
+            }
+        }
+        
+        if (this.path !== undefined) {
+          sb.push(this.path);
+        }
+        
+        if (this.query !== undefined) {
+          sb.push("?");
+          sb.push(this.query);
+        }
+        
+        if (this.fragment !== undefined) {
+          sb.push("#");
+          sb.push(this.fragment);
+        }
+        
+        return sb.join("");
+    };
+
+    var DEFAULT_PORTS = { "http":80, "ws":80, "https":443, "wss":443 };
+    
+    URI.replaceProtocol = function(location, protocol) {
+        var indx = location.indexOf("://");
+        if (indx > 0) {
+            return protocol + location.substr(indx);
+        } else {
+            return "";
+        }
+    }
+})();
+
+
+
+(function() {
+    var parentBridge;
+
+    function pollHash() {
+    	// IE6 cannot access window.location after document.domain is assigned, use document.URL instead
+        var locationURI = new URI((browser == "ie") ? document.URL : location.href);
+        var defaultPorts = { "http":80, "https":443 };
+        if (locationURI.port == null) {
+        	locationURI.port = defaultPorts[locationURI.scheme];
+        	locationURI.authority = locationURI.host + ":" + locationURI.port;
+        }
+
+        if ((locationURI.fragment || "").length == 0) {
+        	setTimeout(pollHash, 20);
+        	return;
+        }
+
+        var locationHash = unescape(locationURI.fragment);
+        var locationHashParts = locationHash.split(",");
+        var sourceOrigin = locationHashParts.shift();
+        var sourceToken = locationHashParts.shift();
+        var sourceBridgeURL = unescape(locationHashParts.shift());
+        var targetOrigin = locationURI.scheme + "://" + locationURI.authority;
+
+        sourceBridge = parent;
+
+        // avoid IE clicking
+        if (typeof(ActiveXObject) != "undefined") {
+            // sourceBridge is an "htmlfile" ActiveXObject, 
+        	// use opener property to reach containing sourceBridge iframe
+        	// Note: this alleviates the need for window.open(), avoiding popup blocker issues
+            sourceBridge = sourceBridge.opener;
+        }
+
+        var target = sourceBridge.parent;
+
+        try {
+    		// Note: must test target.location.hash to handle same, explicit document.domain case
+            target.location.hash;
+        } catch (domainError) {
+            // TODO walk
+            document.domain = document.domain;
+            try {
+            	// some versions of IE6 spuriously causes document domains to mismatch when 
+            	// they should not therefore, perform a reload to try again
+            	target.location.hash;
+            }
+            catch (accessDenied) {
+            	location.reload();
+            	return;
+            }
+        }
+
+        var postMessage0 = target.postMessage0;
+        if (typeof(postMessage0) != "undefined") {
+            setTimeout(function() {
+                postMessage0.attach(target.parent, sourceOrigin, sourceToken, window, parent, sourceBridgeURL);
+            }, 0);
+        }
+    };
+
+	window.onload = pollHash;
+	
+    window.onunload = function() {
+        if (sourceBridge != undefined) {
+            var target = sourceBridge.parent;
+            try {
+                var postMessage0 = target.postMessage0;
+                if (typeof(postMessage0) != "undefined") {
+                    postMessage0.detach(target.parent);
+                }
+            }
+            catch (domainError) {
+                // this can safely be ignored as it is triggered during
+                // pre-emptive unload, or when self-signed certificates are
+                // interactively trusted by the end-user, causing a page reload
+            }
+        }
+    };
+})();

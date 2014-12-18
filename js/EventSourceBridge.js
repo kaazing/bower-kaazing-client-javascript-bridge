@@ -18,4 +18,1249 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-function URI(a){a=a||"";var b=0,c=a.indexOf("://");if(-1!=c){this.scheme=a.slice(0,c),b=c+3;var d=a.indexOf("/",b);-1==d&&(d=a.length,a+="/");var e=a.slice(b,d);this.authority=e,b=d,this.host=e;var f=e.indexOf(":");if(-1!=f&&(this.host=e.slice(0,f),this.port=parseInt(e.slice(f+1),10),isNaN(this.port)))throw new Error("Invalid URI syntax")}var g=a.indexOf("?",b);-1!=g&&(this.path=a.slice(b,g),b=g+1);var h=a.indexOf("#",b);-1!=h?(-1!=g?this.query=a.slice(b,h):this.path=a.slice(b,h),b=h+1,this.fragment=a.slice(b)):-1!=g?this.query=a.slice(b):this.path=a.slice(b)}var browser=null;if("undefined"!=typeof ActiveXObject)browser=-1!=navigator.userAgent.indexOf("MSIE 10")?"chrome":"ie";else if(-1!=navigator.userAgent.indexOf("Trident/7")&&-1!=navigator.userAgent.indexOf("rv:11"))browser="chrome";else if("[object Opera]"==Object.prototype.toString.call(window.opera))browser="opera";else if(-1!=navigator.vendor.indexOf("Apple"))browser="safari",(-1!=navigator.userAgent.indexOf("iPad")||-1!=navigator.userAgent.indexOf("iPhone"))&&(browser.ios=!0);else if(-1!=navigator.vendor.indexOf("Google"))browser=-1!=navigator.userAgent.indexOf("Android")&&-1==navigator.userAgent.indexOf("Chrome")?"android":"chrome";else{if("Gecko"!=navigator.product||!window.find||navigator.savePreferences)throw new Error("couldn't detect browser");browser="firefox"}switch(browser){case"ie":!function(){function a(a,b,c,d){if(d)throw new Error("Not implemented");var e=a[b]||{};a[b]=e,e[c]=c}function b(a,b,c,d){if(d)throw new Error("Not implemented");var e=a[b]||{};delete e[c]}function c(a,b){var c=b.type,d=a[c]||{};for(var e in d)if(d.hasOwnProperty(e)&&"function"==typeof d[e])try{d[e](b)}catch(f){}}if(void 0===document.createEvent){var d=function(){};d.prototype.initEvent=function(a,b,c){this.type=a,this.bubbles=b,this.cancelable=c},document.createEvent=function(a){if("Events"!=a)throw new Error("Unsupported event name: "+a);return new d}}if(document._w_3_c_d_o_m_e_v_e_n_t_s_createElement=document.createElement,document.createElement=function(d){var e=this._w_3_c_d_o_m_e_v_e_n_t_s_createElement(d);if(void 0===e.addEventListener){var f={};e.addEventListener=function(b,c,d){return e.attachEvent("on"+b,c),a(f,b,c,d)},e.removeEventListener=function(a,c,d){return b(f,a,c,d)},e.dispatchEvent=function(a){return c(f,a)}}return e},void 0===window.addEventListener){var e=document.createElement("div"),f="undefined"==typeof postMessage;window.addEventListener=function(a,b,c){f&&"message"==a?e.addEventListener(a,b,c):window.attachEvent("on"+a,b)},window.removeEventListener=function(a,b,c){f&&"message"==a?e.removeEventListener(a,b,c):window.detachEvent("on"+a,b)},window.dispatchEvent=function(a){f&&"message"==a.type?e.dispatchEvent(a):window.fireEvent("on"+a.type,a)}}}();break;case"chrome":case"android":case"safari":if("undefined"==typeof window.postMessage&&"undefined"==typeof window.dispatchEvent&&"function"==typeof document.dispatchEvent){window.dispatchEvent=function(a){document.dispatchEvent(a)};var addEventListener0=window.addEventListener;window.addEventListener=function(a,b,c){"message"===a?document.addEventListener(a,b,c):addEventListener0.call(window,a,b,c)};var removeEventListener0=window.removeEventListener;window.removeEventListener=function(a,b,c){"message"===a?document.removeEventListener(a,b,c):removeEventListener0.call(window,a,b,c)}}break;case"opera":var addEventListener0=window.addEventListener;window.addEventListener=function(a,b,c){var d=b;"message"===a&&(d=function(a){if(void 0===a.origin&&void 0!==a.uri){var c=new URI(a.uri);delete c.path,delete c.query,delete c.fragment,a.origin=c.toString()}return b(a)},b._$=d),addEventListener0.call(window,a,d,c)};var removeEventListener0=window.removeEventListener;window.removeEventListener=function(a,b,c){var d=b;"message"===a&&(d=b._$),removeEventListener0.call(window,a,d,c)}}!function(){var a=URI.prototype;a.toString=function(){var a=[],b=this.scheme;if(void 0!==b){a.push(b),a.push("://"),a.push(this.host);var c=this.port;void 0!==c&&(a.push(":"),a.push(c.toString()))}return void 0!==this.path&&a.push(this.path),void 0!==this.query&&(a.push("?"),a.push(this.query)),void 0!==this.fragment&&(a.push("#"),a.push(this.fragment)),a.join("")};var b={http:80,ws:80,https:443,wss:443};URI.replaceProtocol=function(a,b){var c=a.indexOf("://");return c>0?b+a.substr(c):""}}();var postMessage0=function(){function a(a){this.sourceToken=g(Math.floor(Math.random()*(Math.pow(2,32)-1)),8),this.iframe=a,this.bridged=!1,this.lastWrite=0,this.lastRead=0,this.lastReadIndex=2,this.lastSyn=0,this.lastAck=0,this.queue=[],this.escapedFragments=[]}function b(){var a=this.reader.location.hash;this._lastHash!=a&&(i(this,a.substring(1)),this._lastHash=a)}function c(){var a=this.reader.document.URL;if(this._lastDocumentURL!=a){var b=a.indexOf("#");-1!=b&&(i(this,a.substring(b+1)),this._lastDocumentURL=a)}}function d(a,b){if(a.lastWrite<1&&!a.bridged&&b.parent==window){for(var c=a.iframe.src,d=c.split("#"),e=null,f=document.getElementsByTagName("meta"),g=0;g<f.length;g++)"kaazing:resources"==f[g].name&&alert('kaazing:resources is no longer supported. Please refer to the Administrator\'s Guide section entitled "Configuring a Web Server to Integrate with Kaazing Gateway"');var h=r,i=h.toString()+s+"?.kr=xsp&.kv=10.05";if(e){var j=new URI(h.toString()),d=e.split(":");j.host=d.shift(),d.length&&(j.port=d.shift()),i=j.toString()+s+"?.kr=xsp&.kv=10.05"}for(var g=0;g<f.length;g++)if("kaazing:postMessageBridgeURL"==f[g].name){var k=f[g].content,l=new URI(k),m=new URI(location.toString());if(!l.authority&&(l.host=m.host,l.port=m.port,l.scheme=m.scheme,0!=k.indexOf("/"))){var o=m.path.split("/");o.pop(),o.push(k),l.path=o.join("/")}n.BridgeURL=l.toString()}n.BridgeURL&&(i=n.BridgeURL);var p=["I",h,a.sourceToken,escape(i)];if(d.length>1){var q=d[1];p.push(escape(q))}d[1]=p.join("!"),setTimeout(function(){b.location.replace(d.join("#"))},200),a.bridged=!0}}function e(a,b){var c=a.writerURL+"#"+b;a.writer.location.replace(c)}function f(a){return parseInt(a,16)}function g(a,b){var c=a.toString(16),d=[];for(b-=c.length;b-->0;)d.push("0");return d.push(c),d.join("")}function h(a,b){var c=a.queue,d=a.lastRead;if((c.length>0||b)&&a.lastSyn>a.lastAck){var h=a.lastFrames,i=a.lastReadIndex;f(h[i])!=d&&(h[i]=g(d,8),e(a,h.join("")))}else if(c.length>0){var j=c.shift(),k=j[0];if("*"==k||k==a.targetOrigin){a.lastWrite++;var l=j[1],m=l.shift(),n=3,h=[a.targetToken,g(a.lastWrite,8),g(d,8),"F",g(m.length,4),m],i=2;if(l.length>0&&(h[n]="f",a.queue.unshift(j)),a.resendAck){var o=[a.targetToken,g(a.lastWrite-1,8),g(d,8),"a"];h=o.concat(h),i+=o.length}e(a,h.join("")),a.lastFrames=h,a.lastReadIndex=i,a.lastSyn=a.lastWrite,a.resendAck=!1}}else if(b){a.lastWrite++;var h=[a.targetToken,g(a.lastWrite,8),g(d,8),"a"],i=2;if(a.resendAck){var o=[a.targetToken,g(a.lastWrite-1,8),g(d,8),"a"];h=o.concat(h),i+=o.length}e(a,h.join("")),a.lastFrames=h,a.lastReadIndex=i,a.resendAck=!0}}function i(a,b){var c=b.substring(0,8),d=f(b.substring(8,16)),e=f(b.substring(16,24)),g=b.charAt(24);if(c!=a.sourceToken)throw new Error("postMessage emulation tampering detected");var k=a.lastRead,l=k+1;if(d==l&&(a.lastRead=l),(d==l||d==k)&&(a.lastAck=e),d==l||d==k&&"a"==g)switch(g){case"f":var m=b.substr(29,f(b.substring(25,29)));a.escapedFragments.push(m),h(a,!0);break;case"F":var n=b.substr(29,f(b.substring(25,29)));void 0!==a.escapedFragments&&(a.escapedFragments.push(n),n=a.escapedFragments.join(""),a.escapedFragments=[]);var o=unescape(n);j(o,a.target,a.targetOrigin),h(a,!0);break;case"a":b.length>25?i(a,b.substring(25)):h(a,!1);break;default:throw new Error("unknown postMessage emulation payload type: "+g)}}function j(a,b,c){var d=document.createEvent("Events");d.initEvent("message",!1,!0),d.data=a,d.origin=c,d.source=b,dispatchEvent(d)}function k(){for(var a=0,b=v.length;b>a;a++){var c=v[a];c.poll()}setTimeout(k,20)}function l(a){if(a==parent)return u.parent;if(a.parent!=window)throw new Error("Generic peer postMessage not yet implemented");for(var b=document.getElementsByTagName("iframe"),c=0;c<b.length;c++){var d=b[c];if(a==d.contentWindow)return m(d)}}function m(b){var c=b._name;void 0===c&&(c="iframe$"+String(Math.random()).substring(2),b._name=c);var d=u[c];return void 0===d&&(d=new a(b),u[c]=d),d}function n(a,b,c){if("string"!=typeof b)throw new Error("Unsupported type. Messages must be strings");if(a==window)("*"==c||c==r)&&j(b,window,r);else{var d=l(a);d.post(a,b,c)}}function o(){var a=new URI("ie"==browser?document.URL:location.href),b=a.fragment||"";if(null!=document.body&&b.length>0&&"I"==b.charAt(0)){var c=unescape(b),d=c.split("!");if("I"==d.shift()){var e=d.shift(),f=d.shift(),g=unescape(d.shift()),h=r;if(e==h)try{parent.location.hash}catch(i){document.domain=document.domain}var j=d.shift()||"";switch(browser){case"firefox":location.replace([location.href.split("#")[0],j].join("#"));break;default:location.hash=j}var k=l(parent);k.targetToken=f;var m=k.sourceToken,n=g+"#"+escape([h,f,m].join(",")),p;return p=document.createElement("iframe"),p.src=n,p.style.position="absolute",p.style.left="-10px",p.style.top="10px",p.style.visibility="hidden",p.style.width="0px",p.style.height="0px",void document.body.appendChild(p)}}setTimeout(o,20)}var p=new URI("ie"==browser?document.URL:location.href),q={http:80,https:443};null==p.port&&(p.port=q[p.scheme],p.authority=p.host+":"+p.port);var r=p.scheme+"://"+p.authority,s="/.kr";if("undefined"!=typeof postMessage)return function(a,b,c){if("string"!=typeof b)throw new Error("Unsupported type. Messages must be strings");switch("null"===c&&(c="*"),browser){case"ie":case"opera":case"firefox":setTimeout(function(){a.postMessage(b,c)},0);break;default:a.postMessage(b,c)}};var t=a.prototype;t.attach=function(a,d,e,f,g,i){this.target=a,this.targetOrigin=d,this.targetToken=e,this.reader=f,this.writer=g,this.writerURL=i;try{this._lastHash=f.location.hash,this.poll=b}catch(j){this._lastDocumentURL=f.document.URL,this.poll=c}a==parent&&h(this,!0)},t.detach=function(){this.poll=function(){},delete this.target,delete this.targetOrigin,delete this.reader,delete this.lastFragment,delete this.writer,delete this.writerURL},t.poll=function(){},t.post=function(a,b,c){d(this,a);for(var e=1e3,f=escape(b),g=[];f.length>e;){var i=f.substring(0,e);f=f.substring(e),g.push(i)}g.push(f),this.queue.push([c,g]),null!=this.writer&&this.lastAck>=this.lastSyn&&h(this,!1)};var u={},v=[];n.attach=function(a,b,c,d,e,f){var g=l(a);g.attach(a,b,c,d,e,f),v.push(g)};var w=function(a){var b=new URI("ie"==browser?document.URL:location.href),c,d={http:80,https:443};null==b.port&&(b.port=d[b.scheme],b.authority=b.host+":"+b.port);var e=unescape(b.fragment||"");if(e.length>0){var f=e.split(","),g=f.shift(),h=f.shift(),i=f.shift(),j=b.scheme+"://"+document.domain+":"+b.port,k=b.scheme+"://"+b.authority,l=g+"/.kr?.kr=xsc&.kv=10.05",m=document.location.toString().split("#")[0],n=l+"#"+escape([j,h,escape(m)].join(","));if("undefined"!=typeof ActiveXObject){c=new ActiveXObject("htmlfile"),c.open();try{c.parentWindow.opener=window}catch(o){a&&(c.domain=a),c.parentWindow.opener=window}c.write("<html>"),c.write("<body>"),a&&c.write("<script>CollectGarbage();document.domain='"+a+"';</script>"),c.write('<iframe src="'+l+'"></iframe>'),c.write("</body>"),c.write("</html>"),c.close();var p=c.body.lastChild,q=c.parentWindow,r=parent,s=r.parent.postMessage0;"undefined"!=typeof s&&(p.onload=function(){var a=p.contentWindow;a.location.replace(n),s.attach(r,g,i,q,a,l)})}else{var p=document.createElement("iframe");p.src=n,document.body.appendChild(p);var q=window,t=p.contentWindow,r=parent,s=r.parent.postMessage0;"undefined"!=typeof s&&s.attach(r,g,i,q,t,l)}}window.onunload=function(){try{var a=window.parent.parent.postMessage0;"undefined"!=typeof a&&a.detach(r)}catch(b){}"undefined"!=typeof c&&(c.parentWindow.opener=null,c.open(),c.close(),c=null,CollectGarbage())}};n.__init__=function(a,b){var c=w.toString();a.URI=URI,a.browser=browser,b||(b=""),a.setTimeout("("+c+")('"+b+"')",0)},n.bridgeURL=!1,n.detach=function(a){for(var b=l(a),c=0;c<v.length;c++)v[c]==b&&v.splice(c,1);b.detach()},window!=top&&(u.parent=new a,o());for(var x=document.getElementsByTagName("meta"),y=0;y<x.length;y++)if("kaazing:postMessage"===x[y].name){if("immediate"==x[y].content){var z=function(){for(var a=document.getElementsByTagName("iframe"),b=0;b<a.length;b++){var c=a[b];if("immediate"==c.style.KaaPostMessage){c.style.KaaPostMessage="none";var e=m(c);d(e,c.contentWindow)}}setTimeout(z,20)};setTimeout(z,20)}break}for(var y=0;y<x.length;y++)if("kaazing:postMessagePrefix"===x[y].name){var A=x[y].content;null!=A&&A.length>0&&("/"!=A.charAt(0)&&(A="/"+A),s=A)}return setTimeout(k,20),n}();
+
+
+/**
+ * @ignore
+ */
+var browser = null;
+if (typeof(ActiveXObject) != "undefined") {
+    //KG-5860: treat IE 10 same as Chrome
+    if(navigator.userAgent.indexOf("MSIE 10")!=-1){
+        browser="chrome";
+    }else{
+        browser="ie";
+    }
+}
+else if (navigator.userAgent.indexOf("Trident/7") != -1 && navigator.userAgent.indexOf("rv:11") != -1) {
+    // treat IE 11 same as chrome
+    // IE 11 UA string - http://blogs.msdn.com/b/ieinternals/archive/2013/09/21/internet-explorer-11-user-agent-string-ua-string-sniffing-compatibility-with-gecko-webkit.aspx
+    // window.ActiveXObject property is hidden from the DOM
+    browser = "chrome";
+}
+else if(Object.prototype.toString.call(window.opera) == "[object Opera]") {
+    browser = 'opera';
+}
+else if (navigator.vendor.indexOf('Apple') != -1) {
+    // This has to happen before the Gecko check, as that expression also
+    // evaluates to true.
+    browser = 'safari';
+    // add ios attribute for known iOS substrings
+    if (navigator.userAgent.indexOf("iPad")!=-1 || navigator.userAgent.indexOf("iPhone")!=-1) {
+    	browser.ios = true;
+    }
+}
+else if (navigator.vendor.indexOf('Google') != -1) {
+    if ((navigator.userAgent.indexOf("Android") != -1) &&
+        (navigator.userAgent.indexOf("Chrome") == -1)) {
+        browser = "android";
+    }
+    else {
+        browser="chrome";
+    }
+}
+else if (navigator.product == 'Gecko' && window.find && !navigator.savePreferences) {
+    browser = 'firefox'; // safari as well
+}
+else {
+    throw new Error("couldn't detect browser");
+}
+
+
+
+switch (browser) {
+case 'ie':
+(function(){
+    if (document.createEvent === undefined) {
+	    var Event = function() {};
+	    
+	    Event.prototype.initEvent = function(eventType, canBubble, cancelable) {
+	        this.type = eventType;
+	        this.bubbles = canBubble;
+	        this.cancelable = cancelable;
+	    };
+	
+	    document.createEvent = function(eventName) {
+	        if (eventName != "Events") {
+	           throw new Error("Unsupported event name: " + eventName);
+	        }
+	        return new Event();
+	    };
+	}
+    
+	document._w_3_c_d_o_m_e_v_e_n_t_s_createElement = document.createElement;
+	document.createElement = function(name) {
+	
+	    var element = this._w_3_c_d_o_m_e_v_e_n_t_s_createElement(name);
+	
+	    if (element.addEventListener === undefined) {
+		    var allListeners = {};
+		    element.addEventListener = function(name, listener, capture) { element.attachEvent("on" + name, listener); return addEventListener(allListeners, name, listener, capture); };
+		    element.removeEventListener = function(name, listener, capture) { return removeEventListener(allListeners, name, listener, capture); };
+		    element.dispatchEvent = function(event) { return dispatchEvent(allListeners, event); };
+		}
+	    
+	    return element;
+	};
+	
+    if (window.addEventListener === undefined) {
+    	// Note: fireEvent does not support custom events
+    	//       use an orphan router element instead
+    	var router = document.createElement("div");
+    	var routeMessage = (typeof(postMessage) === "undefined");
+    	
+        window.addEventListener = function(name, listener, capture) {
+        	if (routeMessage && name == "message") {
+        		router.addEventListener(name, listener, capture);
+        	}
+        	else {
+	        	window.attachEvent("on" + name, listener);
+	       	} 
+       	};
+        window.removeEventListener = function(name, listener, capture) { 
+        	if (routeMessage && name == "message") {
+        		router.removeEventListener(name, listener, capture);
+        	}
+        	else {
+	        	window.detachEvent("on" + name, listener);
+	       	} 
+        };
+        window.dispatchEvent = function(event) {
+        	if (routeMessage && event.type == "message") {
+        		router.dispatchEvent(event);
+        	}
+        	else {
+        		window.fireEvent("on" + event.type, event);
+        	} 
+        };
+    }
+        
+	function addEventListener(allListeners, name, listener, capture) {
+	  if (capture) {
+	    throw new Error("Not implemented");
+	  }
+	  var listeners = allListeners[name] || {};
+	  allListeners[name] = listeners;
+	  listeners[listener] = listener;
+	}
+	
+	function removeEventListener(allListeners, name, listener, capture) {
+	  if (capture) {
+	    throw new Error("Not implemented");
+	  }
+	  var listeners = allListeners[name] || {};
+	  delete listeners[listener];
+	}
+	
+	function dispatchEvent(allListeners, event) {
+	  var name = event.type;
+	  var listeners = allListeners[name] || {};
+	  for (var key in listeners) {
+	      if (listeners.hasOwnProperty(key) && typeof(listeners[key]) == "function") {
+                try {
+                    listeners[key](event);
+                }
+                catch (e) {
+                    // avoid letting listener exceptions
+                    // prevent other listeners from firing
+                }
+	      }
+	  }
+	}
+})();
+break;
+case 'chrome':
+case 'android':
+case 'safari':
+	if (typeof(window.postMessage) === "undefined" && typeof(window.dispatchEvent) === "undefined" && typeof(document.dispatchEvent) === "function") {
+	    window.dispatchEvent = function(event) {
+	   		document.dispatchEvent(event);
+	    };
+		var addEventListener0 = window.addEventListener;
+		window.addEventListener = function(type, listener, capture) {
+			if (type === "message") {
+			  document.addEventListener(type, listener, capture);
+			}
+			else {
+			  addEventListener0.call(window, type, listener, capture);
+			}
+		}
+		var removeEventListener0 = window.removeEventListener;
+		window.removeEventListener = function(type, listener, capture) {
+			if (type === "message") {
+			  document.removeEventListener(type, listener, capture);
+			}
+			else {
+			  removeEventListener0.call(window, type, listener, capture);
+			}
+		}
+	}
+	break;
+case 'opera':
+	var addEventListener0 = window.addEventListener;
+	window.addEventListener = function(type, listener, capture) {
+		var listener0 = listener;
+		if (type === "message") {
+			listener0 = function(event) {
+				if (event.origin === undefined && event.uri !== undefined) {
+					var uri = new URI(event.uri);
+					delete uri.path;
+					delete uri.query;
+					delete uri.fragment;
+					event.origin = uri.toString();
+				}
+				return listener(event);
+			};
+			listener._$ = listener0;
+		}
+		addEventListener0.call(window, type, listener0, capture);
+	}
+
+	var removeEventListener0 = window.removeEventListener;
+	window.removeEventListener = function(type, listener, capture) {
+		var listener0 = listener;
+		if (type === "message") {
+		  	listener0 = listener._$;
+		}
+		removeEventListener0.call(window, type, listener0, capture);
+	}
+	break;
+}
+
+
+
+/**
+ * Creates a new URI instance with the specified location.
+ *
+ * @param {String} str  the location string
+ * 
+ * @private
+ * @class  Represents a Uniform Resource Identifier (URI) reference. 
+ */
+function URI(str) {
+	// TODO: use regular expression instead of manual string parsing
+    str = str || "";
+    var position = 0;
+    
+    var schemeEndAt = str.indexOf("://");
+    if (schemeEndAt != -1) {
+	    /**
+	     * The scheme property indicates the URI scheme.
+	     *
+	     * @public
+	     * @field
+	     * @name scheme
+	     * @type String
+	     * @memberOf URI
+	     */
+        this.scheme = str.slice(0, schemeEndAt);
+        position = schemeEndAt + 3;
+
+        var pathAt = str.indexOf('/', position);
+        if (pathAt == -1) {
+           pathAt = str.length;
+           // Add trailing slash to root URI if it is missing
+           str += "/";
+        }
+
+        var authority = str.slice(position, pathAt);
+        /**
+         * The authority property indiciates the URI authority.
+         *
+         * @public
+         * @field
+         * @name authority
+         * @type String
+         * @memberOf URI
+         */
+        this.authority = authority;
+        position = pathAt;
+        
+        /**
+         * The host property indiciates the URI host.
+         *
+         * @public
+         * @field
+         * @name host
+         * @type String
+         * @memberOf URI
+         */
+        this.host = authority;
+        var colonAt = authority.indexOf(":");
+        if (colonAt != -1) {
+            this.host = authority.slice(0, colonAt);
+
+	        /**
+	         * The port property indiciates the URI port.
+	         *
+	         * @public
+	         * @field
+	         * @name port
+	         * @type Number
+	         * @memberOf URI
+	         */
+            this.port = parseInt(authority.slice(colonAt + 1), 10);
+            if (isNaN(this.port)) {
+                throw new Error("Invalid URI syntax");
+            }
+        } 
+    }
+
+    var queryAt = str.indexOf("?", position);
+    if (queryAt != -1) {
+        /**
+         * The path property indiciates the URI path.
+         *
+         * @public
+         * @field
+         * @name path
+         * @type String
+         * @memberOf URI
+         */
+        this.path = str.slice(position, queryAt);
+        position = queryAt + 1;
+    }
+
+    var fragmentAt = str.indexOf("#", position);
+    if (fragmentAt != -1) {
+        if (queryAt != -1) {
+            this.query = str.slice(position, fragmentAt);
+        }
+        else {
+            this.path = str.slice(position, fragmentAt);
+        }
+        position = fragmentAt + 1;
+        /**
+         * The fragment property indiciates the URI fragment.
+         *
+         * @public
+         * @field
+         * @name fragment
+         * @type String
+         * @memberOf URI
+         */
+        this.fragment = str.slice(position);
+    }
+    else {
+        if (queryAt != -1) {
+            this.query = str.slice(position);
+        }
+        else {
+            this.path = str.slice(position);
+        }
+    }
+}
+
+(function() {
+    var $prototype = URI.prototype;
+    
+    /**
+     * Returns a String representation of this URI.
+     *
+     * @return {String}  a String representation
+     *
+     * @public
+     * @function
+     * @name toString
+     * @memberOf URI
+     */
+    $prototype.toString = function() {
+        var sb = [];
+        
+        var scheme = this.scheme;
+        if (scheme !== undefined) {
+            sb.push(scheme);
+            sb.push("://");
+            sb.push(this.host);
+            
+            var port = this.port;
+            if (port !== undefined) {
+                sb.push(":");
+                sb.push(port.toString());
+            }
+        }
+        
+        if (this.path !== undefined) {
+          sb.push(this.path);
+        }
+        
+        if (this.query !== undefined) {
+          sb.push("?");
+          sb.push(this.query);
+        }
+        
+        if (this.fragment !== undefined) {
+          sb.push("#");
+          sb.push(this.fragment);
+        }
+        
+        return sb.join("");
+    };
+
+    var DEFAULT_PORTS = { "http":80, "ws":80, "https":443, "wss":443 };
+    
+    URI.replaceProtocol = function(location, protocol) {
+        var indx = location.indexOf("://");
+        if (indx > 0) {
+            return protocol + location.substr(indx);
+        } else {
+            return "";
+        }
+    }
+})();
+
+
+
+// See HTML5 Specification, Section 6.4 Cross-document Messaging
+/*
+ * Provides an emulation of HTML5 window.postMessage, 
+ * leveraging the native implementation if available.
+ *
+ * @function
+ *
+ * @param {Window} target  the target window to receive messages
+ * @param {String} message the message to send to the target window
+ * @param {String} origin  the origin of the message
+ */
+var postMessage0 =
+(function() {
+    // IE6 cannot access window.location after document.domain is assigned, use document.URL instead
+    var locationURI = new URI((browser == "ie") ? document.URL : location.href);
+    var defaultPorts = { "http":80, "https":443 };
+    if (locationURI.port == null) {
+        locationURI.port = defaultPorts[locationURI.scheme];
+        locationURI.authority = locationURI.host + ":" + locationURI.port;
+    }
+
+    var windowOrigin = locationURI.scheme + "://" + locationURI.authority;
+    var prefix = "/.kr";
+
+    // Note: typeof(postMessage) returns "object" on IE8, others return "function"
+    if (typeof(postMessage) !== "undefined") {
+        return function(target, message, origin) {
+            if (typeof(message) != "string") {
+                throw new Error("Unsupported type. Messages must be strings");
+            }
+
+            // widen target for null origins (such as file:///)
+            if (origin === "null") {
+                origin = "*";
+            }
+
+            // delegate to native postMessage
+            switch (browser) {
+            case "ie":
+            case "opera":
+            case "firefox":
+                // IE 8, Opera 9.64 and Firefox 3.0 implement postMessage with synchronous behavior (!)
+                setTimeout(function() {
+                    target.postMessage(message, origin);
+                }, 0);
+                break;
+            default:
+                target.postMessage(message, origin);
+                break;
+            }
+        }
+    }
+    else {
+        // The emulation of postMessage uses fragment-identifier-messaging.
+        //
+        // Each message is of the form token(8) syn#(8) ack#(8) type[!payload], for example:
+        //
+        //    -->  01234567 00000001 00000000 f 06 "Hello,"
+        //    <--  89abcdef 00000001 00000001 a
+        //    -->  01234567 00000002 00000001 F 06 " world"
+        //    <--  89abcdef 00000002 00000002 a
+        //
+        // Writes are immediately enabled after ack, because acks have no ack
+        // so acks could be overwritten as follows:
+        //
+        //    -->  01234567 00000001 00000000 F 06 "Hello "
+        //    <--  89abcdef 00000001 00000001 a
+        //    <--  01234567 00000002 00000001 F 07 "welcome"
+        //
+        // The timing is sensitive to when ack#0 and message#1 are written versus
+        // when the receiving fragment is read and processed.
+        //
+        // To overcome this, the ack is repeated by the sender, and the receiver
+        // ignores old acks as follows:
+        //
+        //    -->  01234567 00000001 00000000 F 06 "Hello "
+        //    <--  89abcdef 00000001 00000000 a
+        //    <--  01234567 00000001 00000001 a 00000002 00000001 F 07 "welcome"
+        //
+        // No matter the relative timing, the receiver processes one and only one
+        // ack#0 and message#1.
+        //
+        // Another problem is caused due to bidirectional messaging, when both sides
+        // send a message before receiving the in-flight message, as follows:
+        //  
+        //    -->  01234567 00000001 00000000 F 06 "Hello "
+        //    <--  89abcdef 00000001 00000000 F 07 "welcome"
+        //
+        // Now both sides are waiting for an ack before sending the ack, so deadlock occurs.
+        //
+        // To overcome this, when an ack is needed and a message is in flight, then the
+        // message is repeated, but with an updated ack index as follows:
+        //
+        //    -->  01234567 00000001 00000000 F 06 "Hello "
+        //    <--  89abcdef 00000001 00000000 F 07 "welcome"
+        //    -->  01234567 00000001 00000001 F 05 "Hello"
+        //
+        // This repeated send causes the receiver to send the next message, acknowledging the
+        // repeated send.  However, the duplicated message is not re-processed.
+        // If the repeated send is received before the receiver observes the original, then
+        // it behaves the same as if no deadlock occurred.
+        //
+        // Note: an alternative, to use a total of 4 iframes, with 2 pairs of (write, ack) iframes
+        //       is considered unnecessary overhead
+        
+        function MessagePipe(iframe) {
+            this.sourceToken = toPaddedHex(Math.floor(Math.random() * (Math.pow(2, 32) - 1)), 8);
+            this.iframe = iframe;
+            this.bridged = false;
+            this.lastWrite = 0;
+            this.lastRead = 0;
+            this.lastReadIndex = 2; // ack# position in payload structure (zero-based)
+            this.lastSyn = 0;
+            this.lastAck = 0;
+            this.queue = [];
+            this.escapedFragments = [];
+        }
+        
+        var $prototype = MessagePipe.prototype;
+
+        $prototype.attach = function(target, targetOrigin, targetToken, reader, writer, writerURL) {
+            this.target = target;
+            this.targetOrigin = targetOrigin;
+            this.targetToken = targetToken;
+            this.reader = reader;
+            this.writer = writer;
+            this.writerURL = writerURL;
+            
+            // initialize the polling state to detect hash changes
+            try {
+                this._lastHash = reader.location.hash;
+                // poll location.hash for updates
+                this.poll = pollLocationHash;
+            }
+            catch (permissionDenied) {
+                this._lastDocumentURL = reader.document.URL;
+                // poll document.URL for updates
+                this.poll = pollDocumentURL;
+            }
+            
+            if (target == parent) {
+                // target can write immediately
+                // send ack to parent
+                dequeue(this, true);
+            }
+        }
+        
+        $prototype.detach = function() {
+            // no more updates, stop polling reader
+            this.poll = function() {};
+            delete this.target;
+            delete this.targetOrigin;
+            delete this.reader;
+            delete this.lastFragment;
+            delete this.writer;
+            delete this.writerURL;
+        }
+        
+        $prototype.poll = function() {};
+        
+        function pollLocationHash() {
+            // handle normal case, where location.hash is readable
+            var currentHash = this.reader.location.hash;
+            if (this._lastHash != currentHash) {
+                process(this, currentHash.substring(1));
+                this._lastHash = currentHash;
+            }
+        }
+        
+        function pollDocumentURL() {
+            // handle IE6 case, where same document.domain permits access
+            // to objects in collaborating windows, but not the location.hash
+            var documentURL = this.reader.document.URL;
+            if (this._lastDocumentURL != documentURL) {
+                var hashAt = documentURL.indexOf("#");
+                if (hashAt != -1) {
+                    process(this, documentURL.substring(hashAt + 1));
+                    this._lastDocumentURL = documentURL;
+                }
+            }
+        }
+        
+        $prototype.post = function(target, message, targetOrigin) {
+            // create bridge iframe, or enable target to create bridge iframe
+            bridgeIfNecessary(this, target);
+            
+            // fragmentation: f = fragment, F = final fragment
+            var maxFragmentSize = 1000;
+            var escapedMessage = escape(message);
+            var escapedFragments = [];
+            while (escapedMessage.length > maxFragmentSize) {
+                var escapedFragment = escapedMessage.substring(0, maxFragmentSize);
+                escapedMessage = escapedMessage.substring(maxFragmentSize);
+                escapedFragments.push(escapedFragment);
+            }
+            escapedFragments.push(escapedMessage);
+            
+            this.queue.push([targetOrigin, escapedFragments]);
+            
+            if (this.writer != null && this.lastAck >= this.lastSyn) {
+                dequeue(this, false);
+            }
+        }
+        
+        function bridgeIfNecessary($this, target) {
+            if ($this.lastWrite < 1 && !$this.bridged) {
+                if (target.parent == window) {
+                    // first write to target writes parent origin to target hash
+                    var src = $this.iframe.src;
+                    var parts = src.split("#");
+
+                    var sourceBridgeAuthority = null;
+                    // TODO: and move this out to a sensible place
+                    var tags = document.getElementsByTagName("meta");
+                    for (var i=0; i<tags.length; i++) {
+                        if (tags[i].name == "kaazing:resources") {
+                            alert('kaazing:resources is no longer supported. Please refer to the Administrator\'s Guide section entitled "Configuring a Web Server to Integrate with Kaazing Gateway"');
+                        }
+                    }
+
+                    // default sourceBridgeURL using this location, the configured prefix, and the usual qs
+                    var sourceOrigin = windowOrigin;
+                    var sourceBridgeURL = sourceOrigin.toString() + prefix + "?.kr=xsp&.kv=10.05";
+
+                    // narrow the bridge location if subdomain was specified
+                    if (sourceBridgeAuthority) {
+                        var sourceOriginURL = new URI(sourceOrigin.toString())
+
+                        // sourceBridgeAuthority may have an explicit port
+                        var parts = sourceBridgeAuthority.split(":");
+                        sourceOriginURL.host = parts.shift();
+                        if (parts.length) {
+                            sourceOriginURL.port = parts.shift()
+                        }
+
+                        sourceBridgeURL = sourceOriginURL.toString() + prefix + "?.kr=xsp&.kv=10.05";
+                    }
+
+                    // if there is a bridge location configured, it should take precedence
+                    for (var i=0; i<tags.length; i++) {
+                        if (tags[i].name == "kaazing:postMessageBridgeURL") {
+                            var bridgeUrlString = tags[i].content
+                            var postMessageBridgeURL = new URI(bridgeUrlString);
+
+                            // verify URL and populate missing fields if it is a relative URL
+                            var baseURL = new URI(location.toString());
+
+                            // if the location is relative, use the page location as the base url 
+                            if (!postMessageBridgeURL.authority) {
+                                postMessageBridgeURL.host = baseURL.host;
+                                postMessageBridgeURL.port = baseURL.port;
+                                postMessageBridgeURL.scheme = baseURL.scheme;
+                                // if the path is relative, replace the filename in the
+                                // base url with the configured string
+                                if (bridgeUrlString.indexOf("/") != 0) {
+                                    var pathParts = baseURL.path.split("/");
+                                    pathParts.pop();
+                                    pathParts.push(bridgeUrlString);
+                                    postMessageBridgeURL.path = pathParts.join("/");
+                                }
+
+                            }
+                            postMessage0.BridgeURL = postMessageBridgeURL.toString();
+                            
+                        }
+                    }
+                    // overwrite the derived bridge url with an explicit version if present
+                    if (postMessage0.BridgeURL) {
+                        sourceBridgeURL = postMessage0.BridgeURL;
+                    }
+
+                    // Sending the initialization message to a listening frame containing postMessage0 (such as
+                    // the XHRBridge) will trigger the creation of bridge iframes that have initialization arguments
+                    // pushed down into them by hash replacement.
+                    //
+                    // source -> target 
+                    // target -> (creates and sets hash) sourceBridge
+                    // sourceBridge -> (creates and sets hash) targetBridge
+                    var payload = ["I", sourceOrigin, $this.sourceToken, escape(sourceBridgeURL)];
+                    if (parts.length > 1) {
+                        var oldHash = parts[1];
+                        payload.push(escape(oldHash));
+                    }
+                    parts[1] = payload.join("!")
+
+                    // schedule location update to avoid stalling onload in FF15
+                    setTimeout(function() {
+                        target.location.replace(parts.join("#"));
+                    }, 200);
+                    
+                    $this.bridged = true;
+                }
+            }
+        }
+        
+        function flush($this, payload) {
+            var newLocation = $this.writerURL + "#" + payload;
+            $this.writer.location.replace(newLocation);
+            //console.log("[" + $this.targetOrigin + "] flush:   " + payload);
+        }
+
+        function fromHex(formatted) {
+            return parseInt(formatted, 16);
+        }
+        
+        function toPaddedHex(value, width) {
+            var hex = value.toString(16);
+            var parts = [];
+            width -= hex.length;
+            while (width-- > 0) {
+                parts.push("0");
+            }
+            parts.push(hex);
+            return parts.join("");
+        }
+        
+        function dequeue($this, ackIfEmpty) {
+            var queue = $this.queue;
+            var lastRead = $this.lastRead;
+            
+            if ((queue.length > 0 || ackIfEmpty) && $this.lastSyn > $this.lastAck) {
+                // resend last payload with updated ack index to avoid deadlock
+                var lastFrames = $this.lastFrames;
+                var lastReadIndex = $this.lastReadIndex;
+                
+                if (fromHex(lastFrames[lastReadIndex]) != lastRead) {
+                    lastFrames[lastReadIndex] = toPaddedHex(lastRead, 8);
+                    flush($this, lastFrames.join(""));
+                }
+            }
+            else if (queue.length > 0) {
+                var entry = queue.shift();
+                var targetOrigin = entry[0];
+
+                // check target origin
+                if (targetOrigin == "*" || targetOrigin == $this.targetOrigin) {
+                    // reserve fragment frame index
+                    $this.lastWrite++;
+
+                    // build the fragment frame
+                    var escapedFragments = entry[1];
+                    var escapedFragment = escapedFragments.shift();
+                    var typeIndex = 3; // location of "F" in array below
+                    var lastFrames = [$this.targetToken, toPaddedHex($this.lastWrite, 8), toPaddedHex(lastRead, 8), 
+                                      "F", toPaddedHex(escapedFragment.length, 4), escapedFragment];
+                    var lastReadIndex = 2;
+
+                    // convert to partial fragment frame if necessary
+                    if (escapedFragments.length > 0) {
+                        lastFrames[typeIndex] = "f";
+                        $this.queue.unshift(entry);
+                    }
+
+                    // resend ack with subsequent frame
+                    // avoids potential gap in frame index sequence
+                    if ($this.resendAck) {
+                        // resend the previous ack frame before fragment frame
+                        var ackFrame = [$this.targetToken, toPaddedHex($this.lastWrite-1, 8), toPaddedHex(lastRead, 8), "a"];
+                        lastFrames = ackFrame.concat(lastFrames);
+                        // increment the last read index (see ackIfEmpty case above)
+                        lastReadIndex += ackFrame.length;
+                    }
+
+                    // send frame(s)
+                    flush($this, lastFrames.join(""));
+
+                    // remember last frames to manage deadlock
+                    $this.lastFrames = lastFrames;
+                    $this.lastReadIndex = lastReadIndex;
+
+                    // expect ack for fragment frame
+                    $this.lastSyn = $this.lastWrite;
+                    
+                    $this.resendAck = false;
+                }
+            }
+            else if (ackIfEmpty) {
+                // reserve ack frame index
+                $this.lastWrite++;
+                
+                // build the ack frame
+                var lastFrames = [$this.targetToken, toPaddedHex($this.lastWrite, 8), toPaddedHex(lastRead, 8), "a"];
+                var lastReadIndex = 2;
+
+                // resend ack with subsequent frame
+                // avoids potential gap in frame index sequence
+                if ($this.resendAck) {
+                    // resend the previous ack frame before fragment frame
+                    var ackFrame = [$this.targetToken, toPaddedHex($this.lastWrite-1, 8), toPaddedHex(lastRead, 8), "a"];
+                    lastFrames = ackFrame.concat(lastFrames);
+                    // increment the last read index (see ackIfEmpty case above)
+                    lastReadIndex += ackFrame.length;
+                }
+
+                // send frame(s)
+                flush($this, lastFrames.join(""));
+                    
+                // remember last frames to manage deadlock
+                $this.lastFrames = lastFrames;
+                $this.lastReadIndex = lastReadIndex;
+
+                // support ack resend with subsequent frame
+                // avoids potential gap in message index sequence
+                $this.resendAck = true;
+            }
+        }
+        
+        function process($this, payload) {
+            //console.log("[" + windowOrigin + "] process: " + payload);
+            
+            var sourceToken = payload.substring(0, 8);
+            var synIndex = fromHex(payload.substring(8, 16));
+            var ackIndex = fromHex(payload.substring(16, 24));
+            var type = payload.charAt(24);
+
+            if (sourceToken != $this.sourceToken) {
+                throw new Error("postMessage emulation tampering detected");
+            }
+
+            // calculate the last read index and expected read index            
+            var lastRead = $this.lastRead;
+            var expectedRead = lastRead + 1;
+
+            // update the last read index if the expected read index is observed
+            if (synIndex == expectedRead) {
+                $this.lastRead = expectedRead;
+            }
+
+            // support updating lastAck for expected or last read frame
+            // the last read frame scenario is triggered by race condition
+            // of both sides sending messages before the other side has
+            // polled an incoming message
+            if (synIndex == expectedRead || synIndex == lastRead) {
+                $this.lastAck = ackIndex;
+            }
+            
+            // process message payload, or skip over old ack to process remaining parts
+            // when sending an ack, writes are enabled immediately, so a subsequent write
+            // could overwrite the ack before it has been processed - to address this,
+            // the new fragment contains both the original ack and the new message, so
+            // we need the ability to skip over repeated acks, and process the remaining parts
+            if (synIndex == expectedRead || (synIndex == lastRead && type == "a")) {
+                switch (type) {
+                    case "f":
+                        var escapedFragment = payload.substr(29, fromHex(payload.substring(25,29)));
+                        $this.escapedFragments.push(escapedFragment);
+
+                        // send next message or ack
+                        dequeue($this, true);
+                        break;
+                    case "F":
+                        var escapedMessage = payload.substr(29, fromHex(payload.substring(25,29)));
+                        if ($this.escapedFragments !== undefined) {
+                            $this.escapedFragments.push(escapedMessage);
+                            escapedMessage = $this.escapedFragments.join("");
+                            $this.escapedFragments = [];
+                        }
+                        
+                        var message = unescape(escapedMessage);
+
+                        // dispatch message
+                        dispatch(message, $this.target, $this.targetOrigin);
+
+                        // send next message or ack
+                        dequeue($this, true);
+                        break;
+                    case "a":
+                        if (payload.length > 25) {
+                            // process remaining frame fragments
+                            process($this, payload.substring(25));
+                        }
+                        else {
+                            // send next message
+                            dequeue($this, false);
+                        }
+                        break;
+                    default:
+                        throw new Error("unknown postMessage emulation payload type: " + type)
+                }
+            }
+        }
+        
+        function dispatch(message, source, origin) {
+            //console.log("[" + origin + " -> " + windowOrigin + "]\n" + message);
+            var messageEvent = document.createEvent("Events");
+            messageEvent.initEvent("message", false, true);
+            messageEvent.data = message;
+            messageEvent.origin = origin;
+            messageEvent.source = source;
+            dispatchEvent(messageEvent);
+        }
+        
+        // Note: ShrinkSafe requires var definitions before references
+        var messagePipes = {};
+        var pollMessagePipes = [];
+        
+        function pollReaders() {
+            for (var i=0,len=pollMessagePipes.length; i < len; i++) {
+                var messagePipe = pollMessagePipes[i];
+                messagePipe.poll();
+            }
+            setTimeout(pollReaders, 20);
+        }
+        
+        function findMessagePipe(target) {
+            if (target == parent) {
+                return messagePipes["parent"];
+            }
+            else if (target.parent == window) {
+                var iframes = document.getElementsByTagName("iframe");
+                for (var i=0; i < iframes.length; i++) {
+                    var iframe = iframes[i];
+                    if (target == iframe.contentWindow) {
+                        return supplyIFrameMessagePipe(iframe);
+                    }
+                }
+            }
+            else {
+                throw new Error("Generic peer postMessage not yet implemented");
+            }
+        }
+        
+        function supplyIFrameMessagePipe(iframe) {
+            var name = iframe._name;
+            if (name === undefined) {
+                name = "iframe$" + String(Math.random()).substring(2);
+                iframe._name = name;
+            }
+            var messagePipe = messagePipes[name];
+            if (messagePipe === undefined) {
+                messagePipe = new MessagePipe(iframe);
+                messagePipes[name] = messagePipe;
+            }
+            return messagePipe;
+        }
+        
+        function postMessage0(target, message, targetOrigin) {
+            if (typeof(message) != "string") {
+                throw new Error("Unsupported type. Messages must be strings");
+            }
+
+            //console.log("[" + windowOrigin + " -> " + targetOrigin + "]\n" + message);
+            if (target == window) {
+                // dispatch message locally
+                if (targetOrigin == "*" || targetOrigin == windowOrigin) {
+                    dispatch(message, window, windowOrigin);
+                }
+            }
+            else {
+                var messagePipe = findMessagePipe(target);
+                messagePipe.post(target, message, targetOrigin);
+            }
+        }
+        
+        postMessage0.attach = function(target, targetOrigin, targetToken, reader, writer, writerURL) {
+            var messagePipe = findMessagePipe(target);
+            messagePipe.attach(target, targetOrigin, targetToken, reader, writer, writerURL);
+            pollMessagePipes.push(messagePipe);
+        }
+
+    var initSourceOriginBridge = function(htmlfileDomain) {
+        // IE6 cannot access window.location after document.domain is assigned, use document.URL instead
+        var locationURI = new URI((browser == "ie") ? document.URL : location.href);
+        var htmlfile;
+
+        var defaultPorts = { "http":80, "https":443 };
+        if (locationURI.port == null) {
+            locationURI.port = defaultPorts[locationURI.scheme];
+            locationURI.authority = locationURI.host + ":" + locationURI.port;
+        }
+
+        var locationHash = unescape(locationURI.fragment || "");
+        
+        if (locationHash.length > 0) {
+            var locationHashParts = locationHash.split(",");
+
+            // create the postMessage target iframe
+            var targetOrigin = locationHashParts.shift();
+            var sourceToken = locationHashParts.shift();
+            var targetToken = locationHashParts.shift();
+
+            var sourceOrigin = locationURI.scheme + "://" + document.domain + ":" + locationURI.port;
+            var sourceBridgeOrigin = locationURI.scheme + "://" + locationURI.authority;
+            var targetBridgeURL = targetOrigin + "/.kr?.kr=xsc&.kv=10.05";
+
+            // derive the source bridge location (without hash) from the current page:
+            var sourceBridgeURL = document.location.toString().split("#")[0];
+            var targetBridgeInitURL = targetBridgeURL + "#" + escape([sourceOrigin, sourceToken, escape(sourceBridgeURL)].join(","));
+
+            // avoid IE clicking
+            if (typeof(ActiveXObject) != "undefined") {
+                htmlfile = new ActiveXObject("htmlfile");
+                htmlfile.open();
+                // some IE versions (such as MultipleIEs) give "Access denied" error when setting 
+                // parentWindow.opener unless the document domain is specified on the htmlfile
+                // other IE versions (such as vanilla IE6 and IE7) fail to synchronize the domains
+                // if document domain is specified explicitly for the htmlfile
+                try {
+                    // let the sourceBridge window be reachable from postMessage target bridge iframe
+                    htmlfile.parentWindow.opener = window;
+
+                }
+                catch (domainError) {
+
+                    if(htmlfileDomain){
+                        htmlfile.domain = htmlfileDomain;
+                    } 
+                    // let the sourceBridge window be reachable from postMessage target bridge iframe
+                    htmlfile.parentWindow.opener = window;
+                }
+                htmlfile.write("<html>");
+                htmlfile.write("<body>");
+
+                // set document.domain for htmlfile if necessary
+                if (htmlfileDomain) {
+                    htmlfile.write("<script>CollectGarbage();document.domain='" + htmlfileDomain + "';</" + "script>");
+                };
+                
+                // IE cannot tolerate # in the initial iframe URL inside ActiveXObject("htmlfile")
+                htmlfile.write("<iframe src=\"" + targetBridgeURL + "\"></iframe>");
+                htmlfile.write("</body>");
+                htmlfile.write("</html>");
+                htmlfile.close();
+
+                var iframe = htmlfile.body.lastChild;
+                var sourceBridge = htmlfile.parentWindow;
+                var target = parent;
+                var postMessage0 = target.parent.postMessage0;
+
+                if (typeof(postMessage0) != "undefined") {
+                    // we must wait until the iframe has completed loading before
+                    // replacing the targetBridge location, otherwise many cascading
+                    // new IE windows or tabs will be opened (a.k.a "postMessage bomb")
+                    iframe.onload = function() {
+                        // delay accessing the iframe contentWindow until after iframe has loaded
+                        var targetBridge = iframe.contentWindow;
+                        
+                        // replace the location to include the # that initializes the target bridge
+                        targetBridge.location.replace(targetBridgeInitURL);
+
+                        // attach the targetBridge writer to the sourceWindow postMessage emulation
+                        postMessage0.attach(target, targetOrigin, targetToken, sourceBridge, targetBridge, targetBridgeURL);
+                    }
+                }
+            }
+            else {
+                // Note: Safari requires initial URL to have a # in order to support
+                //       fragment identifier changes with location.replace
+                //       otherwise the first fragment change causes page reload
+                var iframe = document.createElement("iframe");
+                iframe.src = targetBridgeInitURL;
+                document.body.appendChild(iframe);
+
+                var sourceBridge = window;
+                var targetBridge = iframe.contentWindow;
+                var target = parent;
+                var postMessage0 = target.parent.postMessage0;
+
+
+                if (typeof(postMessage0) != "undefined") {
+                    // attach the targetBridge writer to the source postMessage emulation
+                    postMessage0.attach(target, targetOrigin, targetToken, sourceBridge, targetBridge, targetBridgeURL);
+                }
+            }
+        }
+
+        window.onunload = function() {
+            // detach sourceBridge window reference (htmlfile for IE)
+            try {
+                var postMessage0 = window.parent.parent.postMessage0;
+                if (typeof(postMessage0) != "undefined") {
+                    postMessage0.detach(target);
+                }
+            }
+            catch (permissionDenied) {
+                // Note: this occurs for IE6 when domain mismatch causes this document to be reloaded
+                // deliberately ignore
+            }
+            
+            // clean up htmlfile
+            if (typeof(htmlfile) !== "undefined") {
+                // explicitly remove window reference
+                htmlfile.parentWindow.opener = null;
+
+                // explicitly clear out contents
+                htmlfile.open();
+                htmlfile.close();
+                
+                // remove the reference to the ActiveXObject
+                htmlfile = null;
+                // garbage collect ActiveXObject
+                CollectGarbage();
+            }
+        };
+    };
+
+        postMessage0.__init__ = function(sourceOriginBridgeWindow, explicitDocumentDomain) {
+            var funcString = initSourceOriginBridge.toString()
+
+            // Inject URI and browser (dependencies for initSourceOriginBridge)
+            sourceOriginBridgeWindow.URI = URI;
+            sourceOriginBridgeWindow.browser = browser;
+
+            // send falsy value for explicitDocumentDomain if it is falsy
+            if (!explicitDocumentDomain) {
+                explicitDocumentDomain = "";
+            }
+
+            // For IE6, the htmlfile object cannot be created in a callstack
+            // that touches the source window. Executing initSourceOriginBridge
+            // in the source window creates an ActiveX htmlfile object with the
+            // source location rather than the bridge location. The same
+            // incorrect location is set when a closure is scheduled from the
+            // source window.
+            //
+            // For this reason, a string is scheduled to be evaled in the source
+            // window.
+            sourceOriginBridgeWindow.setTimeout("(" + funcString + ")('" + explicitDocumentDomain + "')", 0);
+
+        }
+
+        postMessage0.bridgeURL = false;
+
+        postMessage0.detach = function(target) {
+            var messagePipe = findMessagePipe(target);
+            for (var i=0; i < pollMessagePipes.length; i++) {
+                if (pollMessagePipes[i] == messagePipe) {
+                    pollMessagePipes.splice(i, 1);
+                }
+            }
+            messagePipe.detach();
+        }
+
+        // target frames poll to get parent origin        
+        if (window != top) {
+            // no parent pipe needed for top window
+            messagePipes["parent"] = new MessagePipe();
+        
+            function initializeAsTargetIfNecessary() {
+                // IE6 cannot access window.location after document.domain is assigned, use document.URL instead
+                var locationURI = new URI((browser == "ie") ? document.URL : location.href);
+                var locationHash = locationURI.fragment || "";
+                if (document.body != null && locationHash.length > 0 && locationHash.charAt(0) == "I") {
+                    var payload = unescape(locationHash);
+                    var parts = payload.split("!");
+                    // init command
+                    if (parts.shift() == "I") {
+                        var sourceOrigin = parts.shift();
+                        var sourceToken = parts.shift();
+                        var sourceBridgeURL = unescape(parts.shift());
+                        var targetOrigin = windowOrigin;
+                        
+                        // handle IE6 same-origin, mixed implicit / explicit document.domain case
+                        if (sourceOrigin == targetOrigin) {
+                            try {
+                                // Note: IE restricts access to location object when parent is in 
+                                //       the same domain with explicit document.domain
+                                //       testing parent.location.hash rather than just location.hash
+                                //       is necessary for Win2K3
+                                parent.location.hash;
+                            }
+                            catch (permissionDenied) {
+                                // explicitly assign domain, making parent.postMessage0 accessible
+                                document.domain = document.domain;
+                            }
+                        }
+
+
+
+                        // we have finished observing the postMessage initialization hash sent by parent
+                        // so now restore the original hash
+                        var oldHash = parts.shift() || "";
+                        switch (browser) {
+                        case "firefox":
+                            // Firefox 3.0 and higher has a native implementation of postMessage
+                            // assigning location.hash in Firefox 2.0 causes history entry
+                            location.replace([location.href.split("#")[0], oldHash].join("#"));
+                            break;
+                        default:
+                            // location.hash is always writable, even in IE6 after document.domain assigned
+                            location.hash = oldHash;
+                            break;
+                        }
+                        
+                        var sourceMessagePipe = findMessagePipe(parent);
+                        sourceMessagePipe.targetToken = sourceToken;
+                        var targetToken = sourceMessagePipe.sourceToken;
+
+
+                        var sourceBridgeURLwithHash = sourceBridgeURL + "#" + escape([targetOrigin, sourceToken, targetToken].join(","));
+                        var sourceBridge;
+
+
+                        sourceBridge = document.createElement("iframe");
+                        sourceBridge.src = sourceBridgeURLwithHash;
+
+                        
+                        sourceBridge.style.position = "absolute";
+                        sourceBridge.style.left = "-10px";
+                        sourceBridge.style.top = "10px";
+                        sourceBridge.style.visibility = "hidden";
+                        sourceBridge.style.width = "0px";
+                        sourceBridge.style.height = "0px";
+                        document.body.appendChild(sourceBridge);
+                        return;
+                    }
+                }
+                setTimeout(initializeAsTargetIfNecessary, 20);
+            }
+            
+            initializeAsTargetIfNecessary();
+        }
+
+        // proactively set the parent origin information on appropriately tagged iframes
+        var tags = document.getElementsByTagName("meta");
+        for(var i=0; i < tags.length; i++) {
+            if (tags[i].name === "kaazing:postMessage") {
+                if ("immediate" == tags[i].content) {
+                    var checkAllIframes = function() {
+                        var iframes = document.getElementsByTagName("iframe");
+                        for (var i=0; i < iframes.length; i++) {
+                            var iframe = iframes[i];
+                            if (iframe.style["KaaPostMessage"] == "immediate") {
+                                iframe.style["KaaPostMessage"] = "none";
+                                var messagePipe = supplyIFrameMessagePipe(iframe);
+                                bridgeIfNecessary(messagePipe, iframe.contentWindow);
+                            }
+                        }
+                        setTimeout(checkAllIframes, 20);
+                    };
+                    setTimeout(checkAllIframes, 20);
+                }
+                break;
+            }
+        }
+        for(var i = 0; i < tags.length; i++) {
+            if (tags[i].name === "kaazing:postMessagePrefix") {
+                var newPrefix = tags[i].content;
+                if (newPrefix != null && newPrefix.length > 0) {
+                    if (newPrefix.charAt(0) != "/") {
+                        newPrefix = "/" + newPrefix;
+                    }
+                    prefix = newPrefix;
+                }
+            }
+        }
+        
+        setTimeout(pollReaders, 20);
+
+        // return postMessage0 for non-native postMessage
+        return postMessage0;
+    }
+})();
